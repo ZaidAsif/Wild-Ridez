@@ -1,57 +1,620 @@
-html, body, #main, #map {
-    padding: 0;
-    margin: 0;
-    height: 100%;
-    width: 100%;
+/* ============================================
+   🦄 Wild Ridez — Ride Dashboard (Dark Celestial)
+   ============================================ */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #0a0a1a;
+  color: var(--dk-text);
 }
+
+/* ---- Map container (full screen) ---- */
+#main, #map {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+/* ============================================
+   📋 Ride Control Panel (Uber-style bottom-left)
+   ============================================ */
 
 .info {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    z-index: 100;
-    width: 275px;
-    background: transparent;
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  z-index: 100;
+  width: 360px;
+  max-width: calc(100vw - 48px);
+  background: rgba(10, 10, 26, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  animation: slideUp 0.5s var(--ease-out-expo) both;
 }
 
-.info .panel-body {
-    background: transparent;
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- Panel Header ---- */
+.panel-header {
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.panel-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.brand-name {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--dk-text);
+  letter-spacing: 1px;
+}
+
+/* ---- Account Button ---- */
+.btn-account {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  color: var(--dk-text);
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--duration-fast) var(--ease-smooth);
+  position: relative;
+}
+
+.btn-account:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.account-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.pull-right {
+  float: right;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  z-index: 1000;
+  display: none;
+  min-width: 180px;
+  padding: 8px 0;
+  margin: 0;
+  background: rgba(10, 10, 26, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.2s var(--ease-smooth);
+}
+
+.dropdown-menu.open,
+.dropdown.open .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu li {
+  list-style: none;
+  margin: 0;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 10px 20px;
+  color: var(--dk-text);
+  font-size: 0.9rem;
+  font-family: var(--font-sans);
+  text-decoration: none;
+  transition: all var(--duration-fast) var(--ease-smooth);
+}
+
+.dropdown-menu a:hover {
+  background: rgba(245, 8, 86, 0.1);
+  color: var(--brand-pink);
+}
+
+.caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-top: 4px dashed;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+  font-size: 0;
+}
+
+/* ---- Panel Body ---- */
+.panel-body {
+  padding: 16px 20px 20px;
+}
+
+/* ---- Ride Request Area ---- */
+.ride-request-area {
+  margin-bottom: 16px;
 }
 
 #request {
-    position: relative;
-    background: #fcc1d4 none repeat scroll 0 0;
-    color: #000;
-    border-color: #000;
-    border-radius: 5px;
-    text-align: center;
-    width: 135px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: linear-gradient(135deg, var(--brand-pink), var(--brand-pink-dark));
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  padding: 14px 20px;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: all var(--duration-normal) var(--ease-spring);
+  box-shadow: 0 4px 20px rgba(245, 8, 86, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+#request::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+#request:not(:disabled):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(245, 8, 86, 0.4);
+}
+
+#request:not(:disabled):active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(245, 8, 86, 0.3);
 }
 
 #request:disabled {
-    color: #999;
-    border-color: #999;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.25);
+  cursor: not-allowed;
+  box-shadow: none;
 }
 
-#accountLink {
-    background: inherit;
+#request:disabled::after {
+  display: none;
+}
+
+.btn-label {
+  flex: 1;
+}
+
+.btn-icon {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+/* ---- Updates Timeline ---- */
+.updates-section {
+  margin-top: 4px;
+}
+
+.updates-header {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: rgba(255, 255, 255, 0.3);
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
 }
 
 #updates {
-    list-style: none;
-    margin-top: 5px;
-    padding: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 30vh;
+  overflow-y: auto;
+}
+
+#updates::-webkit-scrollbar {
+  width: 4px;
+}
+
+#updates::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#updates::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
 }
 
 #updates li {
-    margin: 3px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f7f7f7;
-    padding: 5px;
+  position: relative;
+  margin: 2px 0;
+  padding: 10px 12px 10px 28px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 10px;
+  color: var(--dk-text-secondary);
+  font-size: 0.85rem;
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  animation: slideIn 0.3s var(--ease-out-expo) both;
+  transition: all var(--duration-normal) var(--ease-smooth);
 }
 
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Timeline dot */
+#updates li::before {
+  content: '';
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--brand-pink);
+  opacity: 0.5;
+}
+
+/* Welcome update - highlighted */
+#updates li:first-child {
+  border-color: rgba(245, 8, 86, 0.15);
+  background: rgba(245, 8, 86, 0.04);
+  color: var(--dk-text);
+  font-weight: 500;
+}
+
+#updates li:first-child::before {
+  background: var(--brand-pink);
+  opacity: 1;
+  box-shadow: 0 0 8px var(--brand-pink-glow);
+}
+
+#updates li a {
+  color: var(--brand-pink);
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+/* ============================================
+   🔑 Auth Token Textarea
+   ============================================ */
+
 .authToken {
-    word-wrap: break-word;
+  word-wrap: break-word;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  color: var(--dk-text);
+  padding: 12px;
+  font-size: 0.78rem;
+  font-family: 'SF Mono', 'Courier New', monospace;
+  line-height: 1.5;
+  resize: vertical;
+  outline: none;
+  transition: border-color var(--duration-fast) var(--ease-smooth);
+}
+
+.authToken:focus {
+  border-color: var(--brand-pink);
+}
+
+/* ============================================
+   ⚙️ Config Message Overlays
+   ============================================ */
+
+.configMessage {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s var(--ease-smooth);
+}
+
+.configMessage .backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 26, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 1;
+}
+
+.config-panel {
+  position: relative;
+  z-index: 2;
+  background: rgba(10, 10, 26, 0.95);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  width: min(90%, 36rem);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+  color: var(--dk-text);
+  animation: scaleIn 0.3s var(--ease-out-expo);
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.config-panel .panel-heading {
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  text-align: center;
+}
+
+.config-panel .panel-title {
+  font-size: 1.2rem;
+  margin: 0;
+  font-weight: 700;
+  color: var(--dk-text);
+  font-family: var(--font-serif);
+}
+
+.config-panel .panel-body {
+  padding: 20px 24px;
+  color: var(--dk-text-secondary);
+  line-height: 1.6;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+}
+
+.config-panel a {
+  color: var(--brand-pink);
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.config-panel p {
+  margin: 0 0 12px;
+}
+
+.config-panel p:last-child {
+  margin-bottom: 0;
+}
+
+/* ============================================
+   🪟 Auth Token Modal
+   ============================================ */
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1050;
+  overflow: hidden;
+  outline: 0;
+}
+
+.modal.fade .modal-dialog {
+  transform: translateY(-20px) scale(0.95);
+  opacity: 0;
+  transition: all 0.3s var(--ease-out-expo);
+}
+
+.modal.fade.in .modal-dialog {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.modal.in {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1040;
+  background: rgba(10, 10, 26, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.modal-dialog {
+  position: relative;
+  width: min(90%, 36rem);
+  z-index: 1050;
+}
+
+.modal-content {
+  background: rgba(10, 10, 26, 0.96);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+  color: var(--dk-text);
+  animation: scaleIn 0.3s var(--ease-out-expo);
+}
+
+.modal-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-header .close {
+  background: none;
+  border: none;
+  color: var(--dk-text-muted);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  line-height: 1;
+  border-radius: 6px;
+  transition: all var(--duration-fast) var(--ease-smooth);
+  font-family: var(--font-sans);
+}
+
+.modal-header .close:hover {
+  color: var(--dk-text);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.modal-title {
+  font-size: 1.2rem;
+  margin: 0;
+  font-weight: 700;
+  font-family: var(--font-serif);
+}
+
+.modal-body {
+  padding: 20px 24px;
+}
+
+.modal-footer {
+  padding: 16px 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  text-align: right;
+}
+
+.modal-footer .btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  color: var(--dk-text);
+  padding: 8px 24px;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-smooth);
+}
+
+.modal-footer .btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ============================================
+   🗺️ ArcGIS Map Overrides
+   ============================================ */
+
+.esri-ui-corner .esri-component {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  border-radius: 12px !important;
+  background: rgba(10, 10, 26, 0.8) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.esri-zoom .esri-widget--button {
+  color: var(--dk-text) !important;
+  transition: background var(--duration-fast) var(--ease-smooth) !important;
+}
+
+.esri-zoom .esri-widget--button:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* ============================================
+   📱 Responsive
+   ============================================ */
+
+@media (max-width: 40em) {
+  .info {
+    bottom: 0;
+    left: 0;
+    right: 0;
     width: 100%;
+    max-width: 100%;
+    border-radius: 16px 16px 0 0;
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+
+  .panel-header {
+    padding: 14px 16px;
+  }
+
+  .panel-body {
+    padding: 14px 16px 20px;
+  }
+
+  #request {
+    padding: 12px 16px;
+    font-size: 0.95rem;
+  }
+
+  #updates {
+    max-height: 25vh;
+  }
+
+  .config-panel {
+    width: min(92%, 32rem);
+  }
+}
+
+@media (min-width: 41em) and (max-width: 64em) {
+  .info {
+    left: 16px;
+    bottom: 16px;
+    width: 320px;
+  }
 }

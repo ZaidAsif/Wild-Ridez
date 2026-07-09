@@ -1,0 +1,344 @@
+/* ============================================
+   🌈 Wild Rydes — Design System & Theme Tokens
+   ============================================ */
+
+:root {
+  /* ---- Light Theme (Marketing Pages) ---- */
+  --lt-bg: #faf8ff;
+  --lt-bg-alt: #f0ecf8;
+  --lt-surface: #ffffff;
+  --lt-surface-hover: #f7f4ff;
+  --lt-text: #1a1a2e;
+  --lt-text-secondary: #6b6b80;
+  --lt-text-muted: #9999aa;
+  --lt-border: #e8e4f0;
+  --lt-border-light: #f0ecf8;
+
+  /* Brand colors */
+  --brand-pink: #f50856;
+  --brand-pink-dark: #c40644;
+  --brand-pink-glow: rgba(245, 8, 86, 0.3);
+  --brand-pink-glow-intense: rgba(245, 8, 86, 0.5);
+  --brand-gold: #d4a837;
+  --brand-gold-light: #f0d878;
+  --brand-amber: #ffb347;
+  --brand-purple: #7b2d8e;
+  --brand-purple-light: #a855f7;
+  --brand-cyan: #06b6d4;
+  --brand-cyan-glow: rgba(6, 182, 212, 0.3);
+
+  /* Dark Theme (Ride Page) */
+  --dk-bg: #0a0a1a;
+  --dk-bg-alt: #12122a;
+  --dk-surface: rgba(255, 255, 255, 0.06);
+  --dk-surface-hover: rgba(255, 255, 255, 0.10);
+  --dk-glass: rgba(255, 255, 255, 0.08);
+  --dk-glass-border: rgba(255, 255, 255, 0.12);
+  --dk-text: #f0e6ff;
+  --dk-text-secondary: #b0a6c8;
+  --dk-text-muted: #7a7090;
+
+  /* Hero-specific */
+  --hero-gradient-1: linear-gradient(135deg, #0a0a2e 0%, #1a0a4e 30%, #2a1050 60%, #0a0a2e 100%);
+  --hero-gradient-overlay: linear-gradient(180deg, rgba(10,10,46,0.1) 0%, rgba(245,8,86,0.15) 50%, rgba(10,10,46,0.4) 100%);
+  --hero-text-shadow: 0 4px 40px rgba(0,0,0,0.6);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.12);
+  --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.15);
+  --shadow-glow: 0 0 20px var(--brand-pink-glow);
+  --shadow-glow-intense: 0 0 40px var(--brand-pink-glow-intense);
+
+  /* Glass shadow for dark theme */
+  --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.4);
+
+  /* Typography */
+  --font-serif: 'fairplex-wide', Georgia, serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 999px;
+
+  /* Transitions */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+  --duration-xl: 800ms;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
+  --space-3xl: 8rem;
+}
+
+/* ============================================
+   🌟 Shared Animations
+   ============================================ */
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 8px var(--brand-pink-glow); }
+  50%      { box-shadow: 0 0 30px var(--brand-pink-glow-intense); }
+}
+
+@keyframes pulse-glow-soft {
+  0%, 100% { box-shadow: 0 0 4px var(--brand-pink-glow); }
+  50%      { box-shadow: 0 0 16px var(--brand-pink-glow); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-12px); }
+}
+
+@keyframes float-rotate {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  33%      { transform: translateY(-8px) rotate(-2deg); }
+  66%      { transform: translateY(-4px) rotate(1deg); }
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50%      { opacity: 1; transform: scale(1.3); }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0; }
+  40%, 60% { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes gradient-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes gradient-flow {
+  0%   { background-position: 0% 0%; }
+  50%  { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+@keyframes orbit {
+  0%   { transform: rotate(0deg) translateX(8px) rotate(0deg); }
+  100% { transform: rotate(360deg) translateX(8px) rotate(-360deg); }
+}
+
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer-cta {
+  0%   { transform: translateX(-100%) skewX(-15deg); }
+  60%  { transform: translateX(100%) skewX(-15deg); }
+  100% { transform: translateX(100%) skewX(-15deg); }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ---- Animation Utility Classes ---- */
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s var(--ease-smooth) both;
+}
+
+.animate-fade-in-down {
+  animation: fadeInDown 0.5s var(--ease-smooth) both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s var(--ease-smooth) both;
+}
+
+.animate-fade-in-scale {
+  animation: fadeInScale 0.5s var(--ease-spring) both;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-float-rotate {
+  animation: float-rotate 4s ease-in-out infinite;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.5s var(--ease-spring) both;
+}
+
+/* Scroll-triggered reveal (Chrome 115+, progressive enhancement) */
+@supports (animation-timeline: view()) {
+  .scroll-reveal {
+    animation: reveal-up 0.7s var(--ease-out-expo) both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 25%;
+  }
+}
+
+/* ---- Bento Grid Helper ---- */
+.bento-grid {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.bento-card {
+  background: var(--lt-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl) var(--space-lg);
+  border: 1px solid var(--lt-border);
+  transition: all var(--duration-normal) var(--ease-spring);
+  position: relative;
+  overflow: hidden;
+}
+
+.bento-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--brand-pink);
+}
+
+.bento-card.tall { grid-row: span 2; }
+.bento-card.wide { grid-column: span 2; }
+.bento-card.full { grid-column: 1 / -1; }
+
+/* ---- Glow Effects ---- */
+.glow-pink {
+  box-shadow: 0 0 20px var(--brand-pink-glow);
+}
+
+.glow-pink-hover:hover {
+  box-shadow: 0 0 30px var(--brand-pink-glow-intense);
+}
+
+/* ---- Decorative Sparkle Particles (Pure CSS) ---- */
+.sparkle-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: white;
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+.sparkle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; animation-duration: 2.5s; }
+.sparkle:nth-child(2) { left: 20%; top: 60%; animation-delay: 0.3s; animation-duration: 3s; width: 3px; height: 3px; }
+.sparkle:nth-child(3) { left: 35%; top: 15%; animation-delay: 0.8s; animation-duration: 2s; width: 5px; height: 5px; }
+.sparkle:nth-child(4) { left: 50%; top: 80%; animation-delay: 0.5s; animation-duration: 3.5s; width: 3px; height: 3px; }
+.sparkle:nth-child(5) { left: 65%; top: 30%; animation-delay: 1.2s; animation-duration: 2.8s; }
+.sparkle:nth-child(6) { left: 78%; top: 70%; animation-delay: 0.7s; animation-duration: 2.2s; width: 5px; height: 5px; }
+.sparkle:nth-child(7) { left: 88%; top: 45%; animation-delay: 1.5s; animation-duration: 3.2s; width: 3px; height: 3px; }
+.sparkle:nth-child(8) { left: 45%; top: 45%; animation-delay: 2s; animation-duration: 2.7s; width: 6px; height: 6px; background: var(--brand-gold-light); }
+.sparkle:nth-child(9) { left: 5%; top: 85%; animation-delay: 0.2s; animation-duration: 3.8s; }
+.sparkle:nth-child(10) { left: 92%; top: 10%; animation-delay: 1s; animation-duration: 2.4s; width: 3px; height: 3px; background: var(--brand-gold-light); }
+
+/* ============================================
+   🧩 Shared Utilities
+   ============================================ */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* Star for dark theme */
+.star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: white;
+  border-radius: 50%;
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(135deg, var(--brand-pink), var(--brand-purple-light), var(--brand-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 200%;
+  animation: gradient-shift 4s ease infinite;
+}
+
+.gradient-text-pink {
+  background: linear-gradient(135deg, var(--brand-pink), var(--brand-gold-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Shimmer overlay for buttons */
+.shimmer-overlay {
+  position: relative;
+  overflow: hidden;
+}
+.shimmer-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  background-size: 200% 100%;
+  animation: shimmer-cta 3s ease-in-out infinite;
+  pointer-events: none;
+}
